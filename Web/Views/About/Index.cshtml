@@ -1,0 +1,403 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "About Us";
+}
+@using Web.ViewModels.About;
+@model AboutIndexVM;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/assets/Styles/SCSS/style.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+          crossorigin="anonymous" />
+    <script src="~/assets/Scripts/about.js" defer></script>
+    <script src="~/assets/Scripts/navbar.js" defer></script>
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+
+    <div id="about-head"></div>
+    <nav class="about-nav">
+        <div class="about-nav-inner">
+            <div>
+                <a asp-action="index" asp-controller="home">
+                    <img src="/assets/logo.png" alt="" />
+                </a>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <a href="#business">Who We Are</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#whatwedo">What We Do</a>
+                </div>
+                <div class="menu-item">
+                    <a href="#contact-info">Contact Us</a>
+                </div>
+            </div>
+            <button class="lines-button lines"><span></span></button>
+            <div class="burger-menu-items">
+                <div class="burger-inner">
+                    <a href="#business">Who We Are</a>
+                    <a href="#whatwedo">What We Do</a>
+                    <a href="#contact-info">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <img class="about-banner-img" src="/assets/about-banner.jpg" alt="" />
+        <div class="about-container">
+
+            <section id="business">
+                @if (Model.BusinessInfos.Count > 0)
+                {
+                    <div class="business-header">
+                        <h2 class="title">Who We Are</h2>
+                    </div>
+                    <div class="business-items">
+                        <ul>
+                            <li style="width:100%">
+                                <h4 class="subtitle">Business Info</h4>
+                            </li>
+                            @{
+                                foreach (var businessInfo in Model.BusinessInfos)
+                                {
+                                    <li>
+                                        <img src="/assets/images/@businessInfo.PhotoName"
+                                     alt="" />
+                                        @Html.Raw(businessInfo.Description)
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                }
+            </section>
+
+            <section id="facts-figures">
+                @{
+                    if (Model.Facts.Count > 0)
+                    {
+                        <div class="facts-container">
+                            <div class="fact-header">
+                                <h4 class="subtitle">Facts&Figures</h4>
+                            </div>
+                            @{
+                                foreach (var fact in Model.Facts)
+                                {
+                                    <div class="fact">
+                                        <img src="/assets/images/@fact.PhotoName" alt="" />
+                                        @Html.Raw(fact.Description)
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+                }
+            </section>
+
+            <section id="whatwedo">
+                @{
+                    if (Model.WhatWedo != null)
+                    {
+                        <h2 class="whatwedo-header">What we do</h2>
+                        <div class="whatwedo-container">
+                            <div class="whatwedo-inner">
+                                <h4 class="subtitle">For Customers</h4>
+                                <div class="whatwedo-title">
+                                    <h2>
+                                        @Model.WhatWedo.Title
+                                    </h2>
+                                </div>
+                                <div class="whatdowedo-description">
+                                    <img src="/assets/images/@Model.WhatWedo.PhotoName" alt="" />
+                                    <div>
+                                        @Html.Raw(Model.WhatWedo.Description)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </section>
+            @{
+                if (Model.Services.Count > 0)
+                {
+                    <section class="about-services">
+                        <h2 class="about-services-header">
+                            Our range of services in Azerbaijan
+                        </h2>
+                        <div class="about-services-container">
+                            <div class="about-services-inner">
+                                @foreach (var service in Model.Services)
+                                {
+                                    <div class="about-service-item">
+                                        <div class="about-service-img">
+                                            <img src="/assets/images/@service.PhotoName" alt="" />
+                                        </div>
+                                        <div class="about-service-right">
+                                            <h4>@service.Title <span>@service.SubTitle</span></h4>
+                                            @Html.Raw(service.Description)
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </section>
+                }
+            }
+
+            <section id="contact-info">
+                <div class="contact-inner">
+                    <div class="contact-left">
+                        <section class="mb-4">
+                            <h2 class="h1-responsive font-weight-bold col-7 mx-auto my-4">
+                                Contact us
+                            </h2>
+                            <p class="text-center w-responsive mb-5 col-8">
+                                Do you have any questions? Please do not hesitate to contact
+                                us directly. Our team will come back to you within a matter of
+                                hours to help you.
+                            </p>
+
+                            <div class="row">
+                                @{
+                                    <div class="col-md-7 mb-md-0 mb-5">
+                                        <form method="post" asp-action="sendmessage" asp-controller="about">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="md-form mb-0">
+                                                        <label asp-for="@Model.Message.FullName"></label>
+                                                        <input asp-for="@Model.Message.FullName"
+                                                           class="form-control" />
+                                                        <span class="text-danger" asp-validation-for="@Model.Message.FullName"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="md-form mb-0">
+                                                        <label asp-for="@Model.Message.Email"></label>
+                                                        <input asp-for="@Model.Message.Email"
+                                                           class="form-control" />
+                                                        <span class="text-danger" asp-validation-for="@Model.Message.Email"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="md-form mb-0">
+                                                        <label asp-for="@Model.Message.Subject"> </label>
+                                                        <input asp-for="@Model.Message.Subject"
+                                                           class="form-control" />
+                                                        <span class="text-danger" asp-validation-for="@Model.Message.Subject"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="md-form">
+                                                        <label asp-for="@Model.Message.Message"> </label>
+                                                        <textarea type="text"
+                                                              asp-for="@Model.Message.Message"
+                                                              rows="2"
+                                                              class="form-control md-textarea"></textarea>
+                                                        <span class="text-danger" asp-validation-for="@Model.Message.Message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center text-md-left mt-4">
+                                                <button type="submit" class="btn bg-orangered text-light">Send</button>
+                                            </div>
+                                        </form>
+                                        <div class="status"></div>
+                                    </div>
+                                }
+
+                                <div class="col-md-3 text-center">
+                                    <ul class="list-unstyled mb-0">
+                                        <li>
+                                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                                            <p>@Model.ContactInfo.Address</p>
+                                        </li>
+
+                                        <li>
+                                            <i class="fas fa-phone mt-4 fa-2x"></i>
+                                            <p>@Model.ContactInfo.MobileNumber</p>
+                                        </li>
+
+                                        <li>
+                                            <i class="fas fa-envelope mt-4 fa-2x"></i>
+                                            <p>@Model.ContactInfo.Email</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="social-media">
+                            <span>Contact By:</span>
+                            <a title="Contact with Facebook" href="">
+                                <i class="fa-brands fa-facebook facebook"></i>
+                            </a>
+                            <a title="Contact with Linkedin" href="">
+                                <i class="fa-brands fa-linkedin linkedin"></i>
+                            </a>
+                            <a title="Contact with Instagram" href="">
+                                <i class="fa-brands fa-instagram instagram"
+                                   aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-right">
+                        <div class="location">
+                            @Html.Raw(Model.Map.Url)
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- Footer Start-->
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-items">
+                <div class="footer-item">
+                    <h4 class="footer-title" data-id="1">Payment Methods</h4>
+                    <div class="collapsed-items" id="1">
+                        <div class="collapsed-inner">
+                            <div>
+                                <a id="visa" href="/Pages/about.html">
+                                    <img src="/assets/visa.svg" alt="" />
+                                </a>
+                                <a id="mastercard" href="">
+                                    <img src="/assets/mastercard.svg" alt="" />
+                                </a>
+                            </div>
+                            <div>
+                                <a id="maximum-card" href="">
+                                    <img src="/assets/maximum-new.svg" alt="" />
+                                </a>
+                                <a id="world-bank" href="">
+                                    <img src="/assets/world-new.svg" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-item">
+                    <h4 class="footer-title" data-id="2">Mobile Applications</h4>
+                    <div class="collapsed-items" id="2">
+                        <div class="collapsed-inner">
+                            <a href="https://www.apple.com/app-store/" tabindex="0">
+                                <img class="bn46"
+                                     src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                                     alt="bn45" />
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.google.android.play.games&hl=en&gl=US&pli=1"
+                               tabindex="0">
+                                <img class="bn45"
+                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
+                                     alt="bn45" />
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-item">
+                    <h4 class="footer-title" data-id="3">About Us</h4>
+                    <div class="collapsed-items" id="3">
+                        <div class="collapsed-inner">
+                            <a asp-action="index" asp-controller="about" asp-fragment="business">Who we are</a>
+                            <a asp-action="index" asp-controller="about" asp-fragment="whatwedo">What We Do</a>
+                            <a asp-action="index" asp-controller="about" asp-fragment="contact-info">Contact Us</a>
+                            <a asp-action="index" asp-controller="faq">FAQ</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="footer-item">
+                    <h4 class="footer-title" data-id="4">Social Media</h4>
+                    <div class="collapsed-items" id="4">
+                        <div class="collapsed-inner">
+                            <a href="https://www.facebook.com/" id="facebook">
+                                <i class="fa-brands fa-square-facebook"></i>
+                            </a>
+                            <a href="https://www.instagram.com/" id="instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mirgubad-akbarov-191b32242/"
+                               id="linkedin">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="footer-item">
+                    <h4 class="footer-title" data-id="5">Contact Info</h4>
+                    <div class="collapsed-items" id="5">
+                        <div class="collapsed-inner">
+                            <a href="">+994(55)222-21-11<i class="fa-solid fa-mobile"></i></a>
+                            <a href="">+994(12)122-21-11 <i class="fa-solid fa-phone"></i></a>
+                            <a href="">
+                                example@gmail.com <i class="fa-solid fa-envelope"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="footer-rights">This site created By Mirgubad Akbarov</p>
+    </footer>
+    <!--Footer End-->
+    <!-- Scroll To Top-->
+    <a href="#about-head" id="to-top-btn">
+        <svg width="20px"
+             xmlns="http://www.w3.org/2000/svg"
+             class="h-6 w-6"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor"
+             stroke-width="2">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"
+            integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+    @await Html.PartialAsync("_FormValidationPartial")
+
+</body>
+</html>
+<!-- Scroll To Top-->

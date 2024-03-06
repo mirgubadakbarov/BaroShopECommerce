@@ -1,0 +1,29 @@
+﻿@using Web.Areas.Admin.ViewModels.Color;
+@model ColorUpdateVM;
+@{
+    ViewBag.Title = "Color Dashboard";
+}
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Color Update</h3>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="update" asp-controller="color" asp-area="admin" method="post">
+                    <div class="form-group">
+                        <label asp-for="@Model.Title" class="col-form-label"></label>
+                        <input asp-for="@Model.Title" class="form-control">
+                        <span asp-validation-for="@Model.Title"></span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-success" type="submit">Update</button>
+                    <a asp-action="index" asp-controller="color" asp-area="admin" class="btn btn-sm btn-outline-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    }

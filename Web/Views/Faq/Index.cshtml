@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = "FAQ";
+}
+
+@using Web.ViewModels.Faq;
+@model FaqIndexVM;
+
+
+<section class="questions no-select">
+    <div id="question-container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-4">
+                <div class="questions-tabs aos-init aos-animate"
+                     data-aos="fade-up"
+                     data-aos-duration="2000">
+                    @{
+                        foreach (var question in Model.Questions)
+                        {
+                            <div class="@(question.QuestionCategory.ActiveStatus==true?"tab category active-tab":"category tab ")" data-id="@question.QuestionCategory.Id">
+                                <h5 class="tab-title" id="@question.QuestionCategory.Id">@question.QuestionCategory.Title</h5>
+                                <p class="tab-text">
+                                    @Html.Raw(question.QuestionCategory.Description)
+                                </p>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-8">
+                <div class="questions-content aos-init aos-animate"
+                     data-aos="fade-up"
+                     data-aos-duration="2000">
+                    <h5 class="content-title">About Syring Medical</h5>
+                    <p class="help-center">
+                        Can’t find it here? Check out our<a asp-action="index" asp-controller="about" asp-fragment="contact-info" class="help-link">
+                            Contact Us
+                        </a>
+                    </p>
+                    <div class="question" id="questions">
+                        <ul id="accordion">
+                            @{
+                                foreach (var question in Model.Questions)
+                                {
+                                    <li data-aos="fade-up"
+                                    data-id="@question.Id"
+                                    data-aos-duration="2000"
+                                    class="aos-init aos-animate">
+                                        <span class="">@question.Title</span>
+                                        <div class="answer" id="@question.Id" style="display: none">
+                                            @Html.Raw(question.Description)
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            @* <li data-aos="fade-up"
+                            data-id="2"
+                            data-aos-duration="2000"
+                            class="aos-init aos-animate">
+                            <span class="">Why is there an annual membership fee?</span>
+                            <div class="answer" id="2" style="display: none">
+                            While many of our members are happy to support our
+                            practice with the annual membership fee, supporting the
+                            practice is not a requirement of joining One Medical. Most
+                            of our patients do pay the membership fee. However, One
+                            Medical is dedicated to serving our community, regardless
+                            of financial means.
+                            </div>
+                            </li>
+
+                            <li data-aos="fade-up"
+                            data-id="3"
+                            data-aos-duration="2000"
+                            class="aos-init aos-animate">
+                            <span>What if I'm not satisfied with the care I receive?</span>
+                            <div class="answer" id="3">
+                            While many of our members are happy to support our
+                            practice with the annual membership fee, supporting the
+                            practice is not a requirement of joining One Medical. Most
+                            of our patients do pay the membership fee. However, One
+                            Medical is dedicated to serving our community, regardless
+                            of financial means.
+                            </div>
+                            </li>
+
+                            <li data-aos="fade-up"
+                            data-id="4"
+                            data-aos-duration="2000"
+                            class="aos-init aos-animate">
+                            <span>What insurance plans do you accept?</span>
+                            <div class="answer" id="4">
+                            While many of our members are happy to support our
+                            practice with the annual membership fee, supporting the
+                            practice is not a requirement of joining One Medical. Most
+                            of our patients do pay the membership fee. However, One
+                            Medical is dedicated to serving our community, regardless
+                            of financial means.
+                            </div>
+                            </li>
+                            <li data-aos="fade-up"
+                            data-id="5"
+                            data-aos-duration="2000"
+                            class="aos-init aos-animate">
+                            <span>
+                            Do you accept Affordable Care Act (ACA/ObamaCare)
+                            plans?
+                            </span>
+                            <div class="answer" id="5">
+                            While many of our members are happy to support our
+                            practice with the annual membership fee, supporting the
+                            practice is not a requirement of joining One Medical. Most
+                            of our patients do pay the membership fee. However, One
+                            Medical is dedicated to serving our community, regardless
+                            of financial means.
+                            </div>
+                            </li>
+                            <li data-aos="fade-up"
+                            data-id="6"
+                            data-aos-duration="2000"
+                            class="aos-init aos-animate">
+                            <span>Do you accept off-Exchange or mirrored ACA plans?</span>
+                            <div class="answer" id="6">
+                            While many of our members are happy to support our
+                            practice with the annual membership fee, supporting the
+                            practice is not a requirement of joining One Medical. Most
+                            of our patients do pay the membership fee. However, One
+                            Medical is dedicated to serving our community, regardless
+                            of financial means.
+                            </div>
+                            </li>
+                            <li data-aos="fade-up"
+                            data-id="7"
+                            data-aos-duration="2000"
+                            class="aos-init aos-animate">
+                            <span>Why did I get a bill from PatientPay?</span>
+                            <div class="answer" id="7">
+                            While many of our members are happy to support our
+                            practice with the annual membership fee, supporting the
+                            practice is not a requirement of joining One Medical. Most
+                            of our patients do pay the membership fee. However, One
+                            Medical is dedicated to serving our community, regardless
+                            of financial means.
+                            </div>
+                            </li>
+                            <li data-aos="fade-up"
+                            data-id="8"
+                            data-aos-duration="2000"
+                            class="aos-init aos-animate">
+                            <span>
+                            Does FSA (sometimes HSA) cover my cost of
+                            membership?
+                            </span>
+                            <div class="answer" id="8">
+                            While many of our members are happy to support our
+                            practice with the annual membership fee, supporting the
+                            practice is not a requirement of joining One Medical. Most
+                            of our patients do pay the membership fee. However, One
+                            Medical is dedicated to serving our community, regardless
+                            of financial means.
+                            </div>
+                            </li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".aos-init").click(function () {
+                var id = $(this).data("id");
+                $(`.answer[id=${id}]`).toggle(300);
+            });
+
+            $(".tab").click(function () {
+                var id = $(this).data("id");
+                $(".tab").removeClass("active-tab");
+                $(this).addClass("active-tab")
+                $(".content-title").text($(`.tab-title[id=${id}]`).html());
+            });
+
+
+            $(document).on("click", '.category', function () {
+                var id = $(this).data('id')
+
+                $.ajax({
+                    method: "GET",
+                    url: "/faq/filterbycategory",
+                    data: {
+                        id: id
+                    },
+                    success: function (result) {
+                        $('#questions').html("");
+                        $('#questions').append(result);
+                    }
+                })
+            })
+
+
+
+        });
+
+
+    </script>
+
+
+
+
+                                    }

@@ -1,0 +1,124 @@
+.qusetions #container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.questions {
+  background-color: #f5f5f5;
+  padding: 100px 0;
+}
+
+.questions .tab {
+  padding: 23px 34px 23px;
+  background-color: #FFF;
+  margin-bottom: 20px;
+  border: 1px solid #e1e1e1;
+  transition: 0.5s all linear;
+  cursor: pointer;
+}
+
+.questions .tab:hover {
+  border-color: #007DF2;
+}
+
+.questions .tab:hover .tab-title {
+  color: #007DF2;
+}
+
+.questions .tab .tab-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.questions .tab .tab-text {
+  font-size: 14px;
+  color: #888;
+}
+
+.questions .questions-content {
+  padding: 29px 45px 46px;
+  background-color: #FFF;
+}
+
+.questions .questions-content .tab-title {
+  font-weight: 600;
+}
+
+.questions .questions-content .help-center {
+  font-size: 15px;
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.questions .questions-content .help-center .help-link {
+  transition: 0.3s all linear;
+  color: #303030;
+}
+
+.questions .questions-content .help-center .help-link:hover {
+  color: #007DF2;
+}
+
+.questions #accordion {
+  list-style: none;
+  padding: 2px;
+}
+
+.questions #accordion > li {
+  display: block;
+  list-style: none;
+}
+
+.questions #accordion > li > span {
+  display: block;
+  margin-top: 20px;
+  padding: 15px 20px;
+  background: url(../assets/images/down-arrow.svg) no-repeat 96% 6px #FFF;
+  background-position-y: center;
+  background-size: 10px;
+  border: 1px solid #e1e1e1;
+  font-weight: normal;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.5s background-color linear;
+}
+
+.questions #accordion > li > span:hover {
+  background-color: #007DF2;
+  color: white;
+}
+
+.questions #accordion > li > div {
+  list-style: none;
+  display: none;
+  overflow: auto;
+  padding: 23px 30px;
+  font-size: 14px;
+  border-left: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.questions #accordion > ul li {
+  font-weight: normal;
+  cursor: auto;
+  padding: 0 0 0 7px;
+}
+
+.questions #accordion a {
+  text-decoration: none;
+}
+
+.questions #accordion li > span.active {
+  background: url(../assets/images/expand-arrow.svg) no-repeat 96% 6px #007DF2;
+  background-position-y: center;
+  background-size: 10px;
+  color: white;
+}/*# sourceMappingURL=faq.css.map */

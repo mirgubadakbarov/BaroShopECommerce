@@ -1,0 +1,33 @@
+﻿@using Web.ViewModels.Components;
+@model HeaderComponentVM;
+
+@{
+    foreach (var product in Model.Products)
+    {
+        <div class="search-result-item">
+            <div class="search-result-img">
+                <a asp-action="details" asp-controller="product" asp-route-id="@product.Id">
+                    <img class="result-img" src="/assets/images/@product.MainPhoto" alt="" />
+                </a>
+            </div>
+            <div class="item-info">
+                <p title="@product.Title">
+                    <strong>@product.Brand.Title</strong>
+                    @product.Title
+                </p>
+                <span class="price">@product.Price$</span>
+            </div>
+            <div class="d-flex gap-3">
+                <div class="product-heart" data-id="@product.Id">
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="add-basket-btn" onclick="AddToBasket(@product.Id)" data-id="@product.Id">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

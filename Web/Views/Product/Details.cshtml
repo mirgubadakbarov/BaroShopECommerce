@@ -1,0 +1,152 @@
+﻿@using Web.ViewModels.Product;
+@model ProductDetailsVM;
+
+<div class="product-details-main">
+    <div class="product-details-container" style="margin-bottom:50px;">
+        <div class="product-details-item">
+            <div class="product-details-left">
+                <div class="photos">
+                    <div class="big-photo">
+                        <div class="slider slider-for">
+                            @{
+                                <div><img src="/assets/images/@Model.Product.MainPhoto" alt="" /></div>
+                                foreach (var productPhoto in Model.Product.ProductPhotos)
+                                {
+                                    <div><img src="/assets/images/@productPhoto.Name" alt="" /></div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="small-photos">
+                        <div id="slider" class="slider slider-nav">
+                            @{
+                                <div>
+                                    <img style="width: 70px;height: 100px; border: 1px solid #e6e6e6;border-radius: 3px;"
+                                         src="/assets/images/@Model.Product.MainPhoto"
+                                         alt="" />
+                                </div>
+                                foreach (var productPhoto in Model.Product.ProductPhotos)
+                                {
+                                    <div>
+                                        <img style="width: 70px;height: 100px; border: 1px solid #e6e6e6;border-radius: 3px;"
+                                         src="/assets/images/@productPhoto.Name"
+                                         alt="" />
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-details-right">
+                <div class="page-info">
+                    <span><a asp-action="index" asp-controller="product">Products</a> / <a class="disabled">@Model.Product.Gender</a> </span>
+                </div>
+                <div class="product-info">
+                    <span class="product-title">
+                        <strong>@Model.Product.Brand.Title</strong> @Model.Product.Title
+                    </span>
+                    <p class="price">@Model.Product.Price$</p>
+                </div>
+                <div class="color">
+                    <p class="choosen-color">
+                        Color: <span id="choosen-color"></span>
+                    </p>
+                    @{
+                        foreach (var productColor in Model.Product.Colors)
+                        {
+                            <input type="radio"
+                               name="color"
+                               class="btn-check color"
+                               data-value="@productColor.Color.Title.ToLower()"
+                               id="@productColor.Color.Title.ToLower()"
+                               autocomplete="off" />
+                            <label class="btn bg-@productColor.Color.Title.ToLower() product-color" for="@productColor.Color.Title.ToLower()"></label>
+                        }
+                    }
+
+                </div>
+                <div class="sizes">
+                    <p class="choosen-size">Size: <span id="choosen-size"></span></p>
+                    @{
+                        foreach (var productSize in Model.Product.Sizes.OrderByDescending(s => s.Size.Title))
+                        {
+                            <input type="radio"
+                               name="size"
+                               class="btn-check size"
+                               data-value="@productSize.Size.Title"
+                               id="@productSize.Size.Title"
+                               autocomplete="off" />
+                            <label class="btn btn-light" for="@productSize.Size.Title">@productSize.Size.Title.ToUpper()</label>
+                        }
+                    }
+
+
+                </div>
+                <div class="add-section">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="add-basket-btn" data-id="@Model.Product.Id">Add To Basket</button>
+
+                    }
+                    <div class="details-wish-btn product-heart" data-id="@Model.Product.Id">
+                        <a ><i class="fa fa-heart" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div class="product-description">
+                    <h4>Product Details</h4>
+                    <p>
+                        @Html.Raw(Model.Product.Description)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{
+        if (Model.RelatedProducts.Count > 0)
+        {
+            <section class="related-products">
+                <h3>Related Products</h3>
+                <div id="related-container">
+                    <div id="container">
+                        <div id="prevrelated">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="related-items">
+                            <ul transform="translate(-1600px)">
+
+                                @foreach (var relatedProduct in Model.RelatedProducts)
+                                {
+                                    <li>
+                                        <div class="related-item">
+                                            <div class="related-img">
+                                                <a asp-action="details" asp-controller="product" asp-route-id="@relatedProduct.Id">
+                                                    <img src="/assets/images/@relatedProduct.MainPhoto" alt="@relatedProduct.Title" />
+                                                </a>
+                                            </div>
+                                            <p style="overflow: hidden;text-align: left;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;"><strong>@relatedProduct.Brand.Title</strong>  @relatedProduct.Title</p>
+                                            <span>@relatedProduct.Price$</span>
+                                            <i data-id="@relatedProduct.Id" class="fa fa-heart wish-list product-heart" data-id="@relatedProduct.Id" aria-hidden="true"></i>
+                                        </div>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                        <div id="nextrelated">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+    }
+</div>
+
+@section Scripts{
+    <script type="text/javascript"
+        src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="~/assets/Scripts/product-details.js"></script>
+
+                                    }

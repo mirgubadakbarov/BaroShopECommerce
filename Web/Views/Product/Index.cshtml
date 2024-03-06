@@ -1,0 +1,319 @@
+﻿@using Core.Constants;
+@using Web.ViewModels.Product;
+@model ProductIndexVM;
+@{
+
+    ViewBag.Title = "Products";
+    var gender = Context.Request.Query["genderCheck"];
+    var modelcheck = Context.Request.Query["modelCheck"];
+    var materialCheck = Context.Request.Query["materialCheck"];
+    var brendCheck = Context.Request.Query["brendCheck"];
+    var checkColor = Context.Request.Query["checkColor"];
+
+}
+
+<div class="product-container">
+    <div class="product-inner">
+        <aside class="categories">
+
+
+            <form id="filter" method="get" asp-action="index" asp-controller="product">
+
+                <div class="category-item">
+                    <div class="category-title" data-id="1">
+                        <span>Gender</span>
+                        <div><i id="1" class="fas fa-chevron-down arrow"></i></div>
+                    </div>
+                    <div class="sub-categories" id="1">
+                        <div class="inner-category">
+                            @{
+                                <div class="filter-input">
+                                    <input value="" name="genderCheck" class="gender chkbx-toggle" id="allgender" type="radio" checked />
+                                    <label for="allgender"></label>
+                                    <span>All</span>
+                                </div>
+                                foreach (var productGender in Enum.GetValues(typeof(Gender)))
+                                {
+                                    if (gender.ToString() == productGender.ToString())
+                                    {
+                                        <div class="filter-input">
+                                            <input value="@productGender" name="genderCheck" class="gender chkbx-toggle" id="@productGender-gender" type="radio" checked />
+                                            <label for="@productGender-gender"> </label>
+                                            <span>@productGender.ToString().Normalize()</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="filter-input">
+                                            <input value="@productGender" name="genderCheck" class="gender chkbx-toggle" id="@productGender-gender" type="radio" />
+                                            <label for="@productGender-gender"></label>
+                                            <span>@productGender.ToString().Normalize()</span>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-item">
+                    <div class="category-title" data-id="2">
+                        <span>Brand</span>
+                        <div><i id="2" class="fas fa-chevron-down arrow"></i></div>
+                    </div>
+                    <div class="sub-categories scroll" id="2">
+                        <div class="inner-category">
+                            @{
+                                <div class="filter-input">
+                                    <input value="0" id="allBrand" name="brendCheck" class="chkbx-toggle" type="radio" checked>
+                                    <label for="allBrand"></label>
+                                    <span>All</span>
+                                </div>
+                                foreach (var brand in Model.Brands)
+                                {
+                                    if (brand.Id.ToString() == brendCheck.ToString())
+                                    {
+                                        <div class="filter-input">
+                                            <input class="chkbx-toggle" value="@brand.Id" id="@brand.Id-brand" name="brendCheck" type="radio" checked />
+                                            <label for="@brand.Id-brand"></label>
+                                            <span>@brand.Title</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="filter-input">
+                                            <input class="chkbx-toggle" value="@brand.Id" id="@brand.Id-brand" name="brendCheck" type="radio" />
+                                            <label for="@brand.Id-brand"></label>
+                                            <span>@brand.Title</span>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-item">
+                    <div class="category-title" data-id="3">
+                        <span>Color</span>
+                        <div><i id="3" class="fas fa-chevron-down arrow"></i></div>
+                    </div>
+                    <div class="sub-categories scroll" id="3">
+                        <div class="inner-category colors">
+                            @{
+                                foreach (var color in Model.Colors)
+                                {
+                                    if (color.Id.ToString() == checkColor.ToString())
+                                    {
+                                        <div>
+                                            <input checked name="checkColor" type="radio" class="btn-check color" id="@color.Id-color" value="@color.Id" />
+                                            <label title="@color.Title" class="btn bg-@color.Title.ToLower() product-color" for="@color.Id-color">  </label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <input name="checkColor" type="radio" value="@color.Id" class="btn-check color" id="@color.Id-color" />
+                                            <label title="@color.Title" class="btn bg-@color.Title.ToLower() product-color" for="@color.Id-color"> </label>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-item">
+                    <div class="category-title" data-id="4">
+                        <span>Model</span>
+                        <div><i id="4" class="fas fa-chevron-down arrow"></i></div>
+                    </div>
+                    <div class="sub-categories" id="4">
+                        <div class="inner-category">
+                            @{
+                                <div class="filter-input">
+                                    <input value="" name="modelCheck" id="allmodel" class="chkbx-toggle" type="radio" checked />
+                                    <label for="allmodel"></label>
+                                    <span>All</span>
+                                </div>
+                                foreach (var productModel in Enum.GetValues(typeof(Model)))
+                                {
+                                    if (productModel.ToString() == modelcheck.ToString())
+                                    {
+                                        <div class="filter-input">
+                                            <input value="@productModel" name="modelCheck" id="@productModel-model" class="chkbx-toggle" type="radio" checked />
+                                            <label for="@productModel-model"></label>
+                                            <span>@productModel.ToString().Normalize()</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="filter-input">
+                                            <input value="@productModel" name="modelCheck" id="@productModel-model" class="chkbx-toggle" type="radio" />
+                                            <label for="@productModel-model"></label>
+                                            <span>@productModel.ToString().Normalize()</span>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-item">
+                    <div class="category-title" data-id="6">
+                        <span>Material</span>
+                        <div><i id="6" class="fas fa-chevron-down arrow"></i></div>
+                    </div>
+                    <div class="sub-categories" id="6">
+                        <div class="inner-category">
+                            @{
+                                <div class="filter-input">
+                                    <input value="" name="materialCheck" class="chkbx-toggle" id="allmaterial" type="radio" checked />
+                                    <label for="allmaterial"></label>
+                                    <span>All</span>
+                                </div>
+                                foreach (var productMaterial in Enum.GetValues(typeof(Material)))
+                                {
+
+                                    if (productMaterial.ToString() == materialCheck.ToString())
+                                    {
+                                        <div class="filter-input">
+                                            <input value="@productMaterial" class="chkbx-toggle" name="materialCheck" id="@productMaterial-material" type="radio" checked />
+                                            <label for="@productMaterial-material"></label>
+                                            <span>@productMaterial.ToString().Normalize()</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="filter-input">
+                                            <input value="@productMaterial" class="chkbx-toggle" name="materialCheck" id="@productMaterial-material" type="radio" />
+                                            <label for="@productMaterial-material"></label>
+                                            <span>@productMaterial.ToString().Normalize()</span>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-item">
+                    <div class="category-title" data-id="5">
+                        <span>Price</span>
+                        <div><i id="5" class="fas fa-chevron-down arrow"></i></div>
+                    </div>
+                    <div class="sub-categories" id="5">
+                        <div class="inner-category">
+                            <div class="price-filter">
+                                <input asp-for="@Model.MinPrice" placeholder="min" />
+                                <label>-</label>
+                                <input asp-for="@Model.MaxPrice" placeholder="max" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="search-filter">
+                    <button title="search" id="searchbtn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <a title="reset" asp-action="index" asp-controller="product" id="filterResetbtn" type="reset"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </div>
+            </form>
+        </aside>
+
+        <div style="margin-bottom:80px" class="product-center" id="products">
+            <div class="products">
+                @{
+                    foreach (var product in Model.Products)
+                    {
+                        <div class="product-item" data-id="@product.Id">
+                            <a asp-action="details" asp-controller="product" asp-route-id="@product.Id">
+                                <div class="product-img card-img skeleton">
+                                    <img src="/assets/images/@product.MainPhoto" alt="@product.Title" />
+                                </div>
+                            </a>
+                            <div class="product-info">
+                                <p><strong>@product.Brand.Title</strong>  @product.Title</p>
+                                <span class="product-price">@product.Price$</span>
+                            </div>
+                            <div class="head-left">
+                                @{
+                                    if (product.ShippingStatus.ToString().ToLower() == "freeshipping")
+                                    {
+                                        <span class="free-shipping">FREE SHIPPING</span>
+                                    }
+                                    if (product.ShippingStatus.ToString().ToLower() == "fastshipping")
+                                    {
+                                        <span class="fast-shipping">FAST SHIPPING</span>
+                                    }
+                                }
+                            </div>
+                            <div class="head-right" id="@product.Id">
+                                <div class="product-heart" data-id="@product.Id">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                </div>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="add-basket-btn" data-id="@product.Id">
+                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="paginate">
+                <div style="justify-content:center" class="pages">
+                    @{
+                        var prevPage = Model.Page - 1;
+                        if (1 < Model.Page)
+                        {@*asp-action="index" asp-controller="product" data-page="@prevPage"*@
+                            <a style="color:black" asp-route-checkColor="@checkColor" asp-route-brendCheck="@brendCheck" asp-route-materialCheck="@materialCheck" asp-route-modelCheck="@modelcheck" asp-route-minPrice="@Model.MinPrice" asp-route-maxPrice="@Model.MaxPrice" asp-route-genderCheck="@gender" asp-controller="product" asp-route-page="@prevPage">
+                                <span class="page">
+
+                                    <i class="fa fa-chevron-circle-left changepage" data-page="@prevPage" aria-hidden="true"></i>
+
+                                </span>
+                            </a>
+                        }
+                        for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            @*asp-action="index" asp-controller="product" asp-route-page="@i" asp-route-searchinput="@Model.SearchInput"*@
+                            <a asp-action="index" asp-route-checkColor="@checkColor" asp-route-brendCheck="@brendCheck" asp-route-materialCheck="@materialCheck" asp-route-modelCheck="@modelcheck" asp-route-minPrice="@Model.MinPrice" asp-route-maxPrice="@Model.MaxPrice" asp-route-genderCheck="@gender" asp-controller="product" asp-route-page="@i" class="@(i==Model.Page?"page-num changepage  disabled":"changepage  page-num")" data-page="@i">
+                                <span>@i</span>
+                            </a>
+
+                            //<span class="@(i==Model.Page?"page-num changepage disabled":"changepage page-num")" data-page="@i" asp-route-searchinput="@Model.SearchInput">
+                            //    <span>@i</span>
+                            //</span>
+
+                            //<span class="page-num">2</span>
+                            //<span class="page-num">3</span>
+                        }
+
+                        var nextPage = Model.Page + 1;
+
+                        if (Model.Page != Model.PageCount)
+                        { @*asp-action="index" asp-controller="product" asp-route-page="@nextPage"*@
+                            <a style="color:black" asp-route-checkColor="@checkColor" asp-route-brendCheck="@brendCheck" asp-route-materialCheck="@materialCheck" asp-route-modelCheck="@modelcheck" asp-route-minPrice="@Model.MinPrice" asp-route-maxPrice="@Model.MaxPrice" asp-route-genderCheck="@gender" asp-controller="product" asp-route-page="@nextPage">
+                                <span class="page">
+                                    <i class="fa fa-chevron-circle-right changepage" data-page="@nextPage" aria-hidden="true"></i>
+                                </span>
+                            </a>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/assets/Scripts/product.js"></script>
+    <script>
+
+    </script>
+              }

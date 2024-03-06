@@ -1,0 +1,52 @@
+
+.shopping-cart-header{
+    width: 100%;
+    border-top: 1px solid #e6e6ee;
+    background-color: white;
+    height: 70px;
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 8%);
+    margin-bottom: 30px;
+   display: flex;
+   align-items: center;
+
+   .header-inner{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+   }
+
+    h4{
+    
+        color: #fb542b;
+    }
+}
+
+
+@media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+    
+    .bg-grey {
+    background-color: #eae8e8;
+    }
+    
+    .card-container{
+        width: 80%;
+        margin: 0 auto;
+    }
+   

@@ -1,0 +1,40 @@
+﻿@using Web.ViewModels.Faq;
+@model FaqIndexVM;
+
+
+<ul id="accordion">
+    @{
+        foreach (var question in Model.Questions)
+        {
+            <li data-aos="fade-up"
+            data-id="@question.Id"
+            data-aos-duration="2000"
+            class="aos-init aos-animate">
+                <span class="">@question.Title</span>
+                <div class="answer" id="@question.Id" style="display: none">
+                    @Html.Raw(question.Description)
+                </div>
+            </li>
+        }
+    }
+
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"
+        integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+<script>
+
+
+
+    $(".aos-init").click(function () {
+        var id = $(this).data("id");
+        $(`.answer[id=${id}]`).toggle(300);
+    });
+
+
+
+
+</script>
+

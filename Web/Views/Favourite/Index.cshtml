@@ -1,0 +1,75 @@
+﻿@using Web.ViewModels.Favourite;
+@model List<FavouriteListItemVM>;
+@{
+    ViewBag.Title = "Favourites";
+}
+
+<section class="wish-list mb-5" >
+    <div class="wish-container">
+        <div class="wish-header">
+            <h4><i class="fa fa-heart" aria-hidden="true"></i> Favourites</h4>
+        </div>
+        <div class="wish-inner" id="wish-inner">
+
+            @{
+                if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="wish-item" id="@item.Id">
+                            <a asp-action="details" asp-controller="product" asp-route-id="@item.Id">
+                                <div class="wish-img">
+                                    <img src="/assets/images/@item.PhotoName" alt="" />
+                                </div>
+                            </a>
+                            <div class="wish-info">
+                                <p style="overflow: hidden;text-align: left;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;" title="@item.Title">
+                                    @item.Title
+                                </p>
+                                <span class="product-price">@item.Price$</span>
+                            </div>
+                            <div class="wish-bottom">
+                                <div class="sizes">
+                                    <select asp-items="@item.Sizes" asp-for="@item.SizeId">
+                                    </select>
+                                </div>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="add-basket-btn" data-id="@item.Id">
+                                        <i class="fa fa-cart-plus" aria-hidden="true">
+                                            <a> Add Basket</a>
+                                        </i>
+                                    </div>
+                                }
+
+                            </div>
+
+                            <div class="head-left">
+                                @if (item.ShippingStatus.ToString().ToLower() == "freeshipping")
+                                {
+                                    <span class="free-shipping">FREE SHIPPING</span>
+                                }
+                                else if (item.ShippingStatus.ToString().ToLower() == "fastshipping")
+                                {
+                                    <span class="fast-shipping">FAST SHIPPING</span>
+                                }
+                            </div>
+                            <div class="head-right">
+                                <div class="wish-delete" data-id="@item.Id">
+                                    <i class="fa fa-close" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="mt-5">
+                        <p style="font-size:18px">Wish list is empty...</p>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</section>

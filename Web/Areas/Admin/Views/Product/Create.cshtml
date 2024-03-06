@@ -1,0 +1,114 @@
+﻿@using Core.Constants;
+@using Web.Areas.Admin.ViewModels.Product;
+@model ProductCreateVM;
+
+@{
+    ViewBag.Title = "Product Dashboard";
+}
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Product Create</h3>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form enctype="multipart/form-data" asp-action="create" asp-controller="product" asp-area="admin" method="post">
+                    <div class="form-group">
+                        <label asp-for="@Model.Title" class="col-form-label"></label>
+                        <input asp-for="@Model.Title" class="form-control">
+                        <span style="color:red !important" asp-validation-for="@Model.Title"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Price" class="col-form-label"></label>
+                        <input asp-for="@Model.Price" class="form-control">
+                        <span style="color:red !important" asp-validation-for="@Model.Price"></span>
+                    </div>
+                    <div class="form-group" style="width:78px;text-align:center;">
+                        <label asp-for="@Model.BestSelling" class="col-form-label"></label>
+                        <input asp-for="@Model.BestSelling" class="form-control">
+                        <span style="color:red !important" asp-validation-for="@Model.BestSelling"></span>
+
+                        <label asp-for="@Model.InSale" class="col-form-label"></label>
+                        <input asp-for="@Model.InSale" class="form-control">
+                        <span style="color:red !important" asp-validation-for="@Model.InSale"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Description"></label>
+                        <textarea class="form-control" asp-for="@Model.Description" rows="3"></textarea>
+                        <span style="color:red !important" asp-validation-for="@Model.Description"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.BrandId" class="col-form-label"></label>
+                        <select asp-for="@Model.BrandId" asp-items="Model.Brands" class="form-control">
+                        </select>
+                        <span style="color:red !important" asp-validation-for="@Model.BrandId"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Gender" class="col-form-label"></label>
+                        <select asp-for="@Model.Gender" asp-items="@Html.GetEnumSelectList<Gender>()" class="form-control">
+                        </select>
+                        <span style="color:red !important" asp-validation-for="@Model.Gender"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Model" class="col-form-label"></label>
+                        <select asp-for="@Model.Model" asp-items="@Html.GetEnumSelectList<Model>()" class="form-control">
+                        </select>
+                        <span style="color:red !important" asp-validation-for="@Model.Model"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Material" class="col-form-label"></label>
+                        <select asp-for="@Model.Material" asp-items="@Html.GetEnumSelectList<Material>()" class="form-control">
+                        </select>
+                        <span style="color:red !important" asp-validation-for="@Model.Material"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.ShippingStatus" class="col-form-label"></label>
+                        <select asp-for="@Model.ShippingStatus" asp-items="@Html.GetEnumSelectList<ShippingStatus>()" class="form-control">
+                        </select>
+                        <span style="color:red !important" asp-validation-for="@Model.ShippingStatus"></span>
+                    </div>
+
+                    <div class="custom-file mb-3">
+                        <input asp-for="@Model.MainPhoto" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile" asp-for="@Model.MainPhoto"></label>
+                        <span style="color:red !important" asp-validation-for="@Model.MainPhoto"></span>
+                    </div>
+                    <div class="custom-file mb-3">
+                        <input asp-for="@Model.Photos" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile" asp-for="@Model.Photos"></label>
+                        <span style="color:red !important" asp-validation-for="@Model.Photos"></span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-success" type="submit">Submit</button>
+                    <a asp-action="index" asp-controller="product" asp-area="admin" class="btn btn-sm btn-outline-light text-dark">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script>
+        $('select').selectpicker();
+    </script>
+        }

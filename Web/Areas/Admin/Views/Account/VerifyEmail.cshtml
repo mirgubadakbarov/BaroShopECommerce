@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "VerifyEmail";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="verify-container">
+        <div class="alert alert-danger my-5" role="alert">
+            Please check your email !!!
+        </div>
+    </div>
+
+    <style>
+        body {
+            background-color: #050e2d;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 20px;
+        }
+
+        .verify-container {
+            width: 80%;
+            margin: 0 auto;
+            min-height: 62vh;
+            color: white;
+        }
+
+        .alert {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%,-50%)
+        }
+
+    </style>
+</body>
+</html>

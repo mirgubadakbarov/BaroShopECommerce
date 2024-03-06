@@ -1,0 +1,26 @@
+﻿@*@using Web.ViewModels.Product;
+@model ProductLoadMoreVM;
+
+@{
+    foreach (var inSaleProduct in Model.InSaleProducts)
+    {
+
+        <div class="in-sale-item">
+            <div class="in-sale-img">
+                <a asp-action="details" asp-controller="product" asp-route-id="@inSaleProduct.Id">
+                    <img src="/assets/images/@inSaleProduct.MainPhoto" alt="" />
+                </a>
+            </div>
+            <div class="item-info">
+                <p title="@inSaleProduct.Title">
+                    <strong>@inSaleProduct.Brand.Title</strong>
+                    @inSaleProduct.Title
+                </p>
+                <span>@inSaleProduct.Price$</span>
+            </div>
+            <i data-id="@inSaleProduct.Id" class="fa fa-heart wish-list product-heart"
+           aria-hidden="true"></i>
+        </div>
+
+    }
+}*@

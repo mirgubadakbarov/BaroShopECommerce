@@ -1,0 +1,185 @@
+.brands{
+    padding-top: 50px;
+    position: inherit;
+   
+}
+
+.brands-slider{
+  // border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 40px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    width: 80%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.brand-item{
+    cursor: pointer;
+    .brand-name{
+      transition: color .3s;
+    }
+   img{
+        max-width: 68px;
+        min-height: 68px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid rgb(197, 195, 195);  
+        transition: border-color 4s;  
+    }  
+    &:hover img{
+        border-color:orange;
+    }
+    &:hover .brand-name{
+        color: orange;
+    }
+}
+
+.brands__header{
+    text-align: center;
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+
+
+.swiper-slide {
+    text-align: center;
+    float: left;
+    position: relative;
+    width: 65%;
+    background-color: #ccc;
+}
+
+#left,#right{
+    cursor: pointer;
+   color: gray;
+   font-size: 20px;
+
+   &:hover{
+    color: black;
+   }
+}
+
+
+.sliders_block{
+ul {
+    display: flex;
+    transition: transform 0.6s ease;
+  }
+  ul > li {
+    list-style: none;
+    flex: 0 0 10%;
+    padding: 10px;
+  }
+  ul > li > a {
+    background-image: linear-gradient(62deg, #b795ff 0%, #6b91f2 100%);
+    width: 100%;
+    height: 100px;
+    border-radius: 6px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+  .arrows > span {
+    margin: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+.arrows > span:hover {
+  	color: #00b1ff;
+}
+.sliders_block {
+  overflow: hidden;
+}
+.no-active,   .arrows > .no-active:hover {
+	color: #d5d5d5;
+}
+
+.arrows {
+	padding: 10px 0;
+}
+.arrows > span:first-child {
+	margin-left: 0;
+}
+.no-transistion {
+    transition: transform 0s !important;
+}
+
+.no-transistion a {
+  pointer-events: none;
+}
+
+svg {
+     width: 20px;
+    height: 20px;
+}
+
+@layer demo, countdown;
+
+@layer countdown {
+  .countdown {
+    width: fit-content;
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 1rem;
+  }
+  .countdown > .part {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .countdown > .part > .number {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid hsl(0 0% 50% / 0.5);
+    font-size: 1.5rem;
+    position: relative;
+  }
+  .countdown > .part.days {
+    --num: 365;
+  }
+  .countdown > .part.hours {
+    --num: 24;
+  }
+  .countdown > .part:where(.minutes, .seconds) {
+    --num: 60;
+  }
+  .countdown > .part > .number::after {
+    content: "";
+    position: absolute;
+    inset: calc(var(--border-size) * -0.5);
+    border-radius: inherit;
+
+    --degree: calc(360deg / var(--num) * (var(--num) - var(--value, 0)));
+    background-image: conic-gradient(
+      var(--accent) var(--degree),
+      transparent calc(var(--degree) + 0.1deg)
+    );
+
+    --border-size: 4px;
+    --mask-image: radial-gradient(
+      100% 100%,
+      transparent calc(50% - var(--border-size)),
+      black calc(50% - var(--border-size) + 1px)
+    );
+    -webkit-mask-image: var(--mask-image);
+    mask-image: var(--mask-image);
+  }
+  .countdown > .part > .text {
+    text-align: center;
+    opacity: 0.75;
+  }
+}
+
+ 
+

@@ -1,0 +1,41 @@
+﻿@using Web.Areas.Admin.ViewModels.Contact;
+@model ContactUpdateVM;
+
+@{
+    ViewBag.Title = "Contact Dashboard";
+}
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Contact Info Update </h3>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="update" asp-controller="contact" asp-area="admin" method="post">
+                    <div class="form-group">
+                        <label asp-for="@Model.Address" class="col-form-label"></label>
+                        <input asp-for="@Model.Address" class="form-control">
+                        <span asp-validation-for="@Model.Address"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Email" class="col-form-label"></label>
+                        <input asp-for="@Model.Email" class="form-control" />
+                        <span asp-validation-for="@Model.Email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.MobileNumber" class="col-form-label"></label>
+                        <input asp-for="@Model.MobileNumber" class="form-control" />
+                        <span asp-validation-for="@Model.MobileNumber"></span>
+                    </div>
+
+                    <button class="btn btn-sm btn-outline-success" type="submit">Submit</button>
+                    <a asp-action="index" asp-controller="contact" asp-area="admin" class="btn btn-sm btn-outline-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    }

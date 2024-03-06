@@ -1,0 +1,104 @@
+﻿@using Core.Constants;
+@using Web.ViewModels.Product;
+@model ProductIndexVM;
+@{
+
+    var gender = Context.Request.Query["genderCheck"];
+}
+
+@{
+ 
+    <div class="products">
+        @{
+            foreach (var product in Model.Products)
+            {
+               
+                <div class="product-item" data-id="@product.Id">
+                    <a asp-action="details" asp-controller="product" asp-route-id="@product.Id">
+                        <div class="product-img card-img skeleton">
+                            <img src="/assets/images/@product.MainPhoto" alt="@product.Title" />
+                        </div>
+                    </a>
+                    <div class="product-info">
+                        <p>
+                        <strong>@product.Brand.Title</strong> 
+                        @product.Title
+                        </p>
+                        <span class="product-price">@product.Price$</span>
+                    </div>
+                    <div class="head-left">
+                        @{
+                            if (product.ShippingStatus.ToString().ToLower() == "freeshipping")
+                            {
+                                <span class="free-shipping">FREE SHIPPING</span>
+                            }
+                            if (product.ShippingStatus.ToString().ToLower() == "fastshipping")
+                            {
+                                <span class="fast-shipping">FAST SHIPPING</span>
+                            }
+                        }
+                    </div>
+                    <div class="head-right" id="@product.Id">
+                        <div class="product-heart" data-id="@product.Id">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="add-basket-btn" data-id="@product.Id">
+                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    //<div class="paginate">
+    //    <div style="justify-content:center" class="pages">
+    //        @{
+    //            var prevPage = Model.Page - 1;
+    //            if (1 < Model.Page)
+    //            {
+    //                @*asp-action="index" asp-controller="product" data-page="@prevPage"*@
+    //                <a style="color:black">
+    //                    <span class="page">
+
+    //                        <i class="fa fa-chevron-circle-left changepage" data-page="@prevPage" aria-hidden="true"></i>
+
+    //                    </span>
+    //                </a>
+    //            }
+
+
+    //            for (int i = 1; i <= Model.PageCount; i++)
+    //            {
+    //                @*asp-action="index" asp-controller="product" asp-route-page="@i" asp-route-searchinput="@Model.SearchInput"*@
+    //                <a asp-action="index" asp-route-genderCheck="@gender" asp-controller="product" asp-route-page="@i" class="@(i==Model.Page?"page-num changepage  disabled":"changepage  page-num")" data-page="@i">
+    //                    <span>@i</span>
+    //                </a>
+
+    //                //<span class="@(i==Model.Page?"page-num changepage disabled":"changepage page-num")" data-page="@i" asp-route-searchinput="@Model.SearchInput">
+    //                //    <span>@i</span>
+    //                //</span>
+
+    //                //<span class="page-num">2</span>
+    //                //<span class="page-num">3</span>
+    //            }
+
+    //            var nextPage = Model.Page + 1;
+
+    //            if (Model.Page != Model.PageCount)
+    //            { @*asp-action="index" asp-controller="product" asp-route-page="@nextPage"*@
+    //                <a style="color:black">
+    //                    <span class="page">
+    //                        <i class="fa fa-chevron-circle-right changepage" data-page="@nextPage" aria-hidden="true"></i>
+    //                    </span>
+    //                </a>
+
+    //            }
+    //        }
+
+
+    //    </div>
+    //</div>
+}

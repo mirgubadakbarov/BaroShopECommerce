@@ -1,0 +1,46 @@
+﻿@using Web.Areas.Admin.ViewModels.Fact;
+@model FactCreateVM;
+
+@{
+    ViewBag.Title = "About Dashboard";
+}
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="section-block" id="basicform">
+            <h3 class="section-title">Fact&Figures Create</h3>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="create" asp-controller="fact" asp-area="admin" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Description" class="col-form-label"></label>
+                        <textarea asp-for="@Model.Description" class="form-control"></textarea>
+                        <span class="text-danger" asp-validation-for="@Model.Description"></span>
+                    </div>
+                    <div class="custom-file mb-3">
+                        <input asp-for="@Model.Photo" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile" asp-for="@Model.Photo"></label>
+                        <span class="text-danger" asp-validation-for="@Model.Photo"></span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-success" type="submit">Submit</button>
+                    <a asp-action="index" asp-controller="fact" asp-area="admin" class="btn btn-sm btn-outline-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("_FormValidationPartial")
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    }
